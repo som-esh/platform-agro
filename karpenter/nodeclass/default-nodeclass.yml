@@ -1,0 +1,23 @@
+apiVersion: karpenter.k8s.aws/v1
+kind: EC2NodeClass
+metadata:
+  name: micro-spot
+spec:
+  amiSelectorTerms:
+    - alias: al2023@latest
+
+  role: dev-eks-karpenter-node
+
+  subnetSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: dev-eks
+
+  securityGroupSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: dev-eks
+
+  tags:
+    Name: dev-eks-karpenter-node
+    Environment: dev
+    ManagedBy: karpenter
+    karpenter-smoke-test: "true"

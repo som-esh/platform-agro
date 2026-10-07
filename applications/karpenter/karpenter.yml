@@ -16,7 +16,7 @@ spec:
         settings:
           clusterName: dev-eks
         serviceAccount:
-          create: true
+          create: false
           name: karpenter
 
   destination:

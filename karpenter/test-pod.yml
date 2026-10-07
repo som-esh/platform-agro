@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: karpenter-smoke-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: karpenter-smoke-test
+  template:
+    metadata:
+      labels:
+        app: karpenter-smoke-test
+    spec:
+      nodeSelector:
+        karpenter-smoke-test: "true"
+      containers:
+        - name: pause
+          image: public.ecr.aws/eks-distro/kubernetes/pause:3.10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi

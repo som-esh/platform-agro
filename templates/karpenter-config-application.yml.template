@@ -5,16 +5,13 @@ metadata:
   namespace: argocd
 spec:
   project: default
-
   source:
     repoURL: https://github.com/som-esh/platform-agro.git
     targetRevision: master
     path: karpenter
-
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-system
-
   syncPolicy:
     syncOptions:
       - ServerSideApply=true

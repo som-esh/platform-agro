@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: platform-argo
+  namespace: argocd
+spec:
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  source:
+    path: applications
+    repoURL: https://github.com/som-esh/platform-agro.git
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  sources: []
+  project: default

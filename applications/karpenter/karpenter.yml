@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: karpenter
-  namespace: argocd
+  namespace: kube-system
 spec:
   project: default
 

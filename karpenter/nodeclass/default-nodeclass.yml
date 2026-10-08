@@ -6,7 +6,7 @@ spec:
   amiSelectorTerms:
     - alias: al2023@latest
 
-  role: dev-eks-karpenter-node
+  role: dev-eks-node-role
 
   subnetSelectorTerms:
     - tags:

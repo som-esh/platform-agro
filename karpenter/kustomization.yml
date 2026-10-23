@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - nodeclass/default-nodeclass.yml
   - nodepool/default-nodepool.yml
-  - test-pod.yml
+#  - test-pod.yml

@@ -1,0 +1,14 @@
+# L4 mesh metrics (TCP connections/bytes, mTLS) from every ztunnel pod
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: ztunnel
+  namespace: istio-system
+spec:
+  selector:
+    matchLabels:
+      app: ztunnel
+  podMetricsEndpoints:
+    - path: /stats/prometheus
+      targetPort: 15020
+      interval: 15s

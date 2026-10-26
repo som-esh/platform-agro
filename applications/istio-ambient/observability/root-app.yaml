@@ -1,0 +1,21 @@
+# Parent "app of apps" for Prometheus + Kiali.
+# Apply once by hand:  kubectl apply -f observability/root-app.yaml
+# Argo CD then manages everything under observability/apps/.
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: observability
+#   namespace: argocd
+# spec:
+#   project: default
+#   source:
+#     repoURL: <YOUR_GIT_REPO_URL>        # e.g. https://github.com/acme/platform
+#     targetRevision: main
+#     path: observability/apps
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: argocd
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true

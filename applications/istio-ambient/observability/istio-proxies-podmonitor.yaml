@@ -1,0 +1,18 @@
+# L7 metrics (HTTP requests, latency, response codes) from waypoints
+# and Istio-managed ingress gateways in any namespace
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: istio-proxies
+  namespace: istio-system
+spec:
+  namespaceSelector:
+    any: true
+  selector:
+    matchExpressions:
+      - key: gateway.istio.io/managed
+        operator: Exists
+  podMetricsEndpoints:
+    - path: /stats/prometheus
+      targetPort: 15020
+      interval: 15s

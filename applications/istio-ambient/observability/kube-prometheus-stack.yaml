@@ -1,0 +1,69 @@
+# Wave 0: Prometheus Operator + Prometheus (+ node-exporter).
+# Provides the ServiceMonitor/PodMonitor CRDs used in wave 1.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-prometheus-stack
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  project: default
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: kube-prometheus-stack
+    targetRevision: 92.13.1 # pin an exact chart version
+    helm:
+      valuesObject:
+        # You already run kube-state-metrics and metrics-server
+        kubeStateMetrics:
+          enabled: false
+        nodeExporter:
+          enabled: true
+        grafana:
+          enabled: false
+        alertmanager:
+          enabled: false
+        prometheus:
+          prometheusSpec:
+            # Pick up every ServiceMonitor/PodMonitor, not only ones
+            # labelled with this Helm release
+            serviceMonitorSelectorNilUsesHelmValues: false
+            podMonitorSelectorNilUsesHelmValues: false
+            ruleSelectorNilUsesHelmValues: false
+            scrapeInterval: 30s
+            retention: 1d
+            resources:
+              requests:
+                cpu: 200m
+                memory: 1Gi
+            # Requires the EBS CSI driver add-on and a gp3 StorageClass.
+            # Remove storageSpec for a quick test (data lost on restart).
+            storageSpec:
+              volumeClaimTemplate:
+                spec:
+                  storageClassName: gp3
+                  accessModes: ["ReadWriteOnce"]
+                  resources:
+                    requests:
+                      storage: 20Gi
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true # operator CRDs exceed the client-side apply limit
+  ignoreDifferences:
+    # The operator's webhook certs are patched at runtime
+    - group: admissionregistration.k8s.io
+      kind: MutatingWebhookConfiguration
+      jqPathExpressions:
+        - .webhooks[]?.clientConfig.caBundle
+    - group: admissionregistration.k8s.io
+      kind: ValidatingWebhookConfiguration
+      jqPathExpressions:
+        - .webhooks[]?.clientConfig.caBundle

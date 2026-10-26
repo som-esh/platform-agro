@@ -1,0 +1,36 @@
+# Wave 2: Kiali UI, reading metrics from the Prometheus installed in wave 0.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kiali
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  project: default
+  source:
+    repoURL: https://kiali.org/helm-charts
+    chart: kiali-server
+    targetRevision: 2.34.0 # 2.x release listed as compatible with Istio 1.31
+    helm:
+      valuesObject:
+        istio_namespace: istio-system
+        auth:
+          strategy: token # log in with a ServiceAccount token
+        deployment:
+          cluster_wide_access: true
+        external_services:
+          prometheus:
+            # Service created automatically by the Prometheus Operator
+            url: http://prometheus-operated.monitoring.svc:9090
+          grafana:
+            enabled: false
+          tracing:
+            enabled: false
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: istio-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

@@ -24,7 +24,7 @@ spec:
             - linux
         - key: node.kubernetes.io/instance-type
           operator: In
-          values: ["t3.small", "t3a.small"]
+          values: ["t3a.small", "t3a.medium"]
         - key: karpenter.sh/capacity-type
           operator: In
           values:

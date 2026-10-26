@@ -41,7 +41,7 @@ spec:
             resources:
               requests:
                 cpu: 200m
-                memory: 1Gi
+                memory: 500m
             # Requires the EBS CSI driver add-on and a gp3 StorageClass.
             # Remove storageSpec for a quick test (data lost on restart).
             storageSpec:

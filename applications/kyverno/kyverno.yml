@@ -19,5 +19,5 @@ spec:
 
   syncPolicy:
     syncOptions:
-      - CreateNamespace=true
+      - CreateNamespace=false
       - ServerSideApply=true

@@ -24,6 +24,11 @@ spec:
           enabled: false
         alertmanager:
           enabled: false
+        prometheusOperator:
+          admissionWebhooks:
+            enabled: false
+          tls:
+            enabled: false
         prometheus:
           prometheusSpec:
             # Pick up every ServiceMonitor/PodMonitor, not only ones

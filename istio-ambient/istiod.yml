@@ -15,7 +15,9 @@ spec:
       valuesObject:
         profile: ambient
         pilot:
-          autoscaleMin: 1 # HA for production
+          autoscaleEnabled: false
+          replicaCount: 1
+          # autoscaleMin: 0 # HA for production
   destination:
     server: https://kubernetes.default.svc
     namespace: istio-system

@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/som-esh/platform-agro
+    targetRevision: master
+    path: istio-ambient
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: istio-system/observability
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

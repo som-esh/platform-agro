@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: istio
+  name: istio-observability
   namespace: argocd
 spec:
   project: default
@@ -9,11 +9,11 @@ spec:
   source:
     repoURL: https://github.com/som-esh/platform-agro
     targetRevision: master
-    path: istio-ambient
+    path: istio-ambient/observability
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: istio-system/observability
+    namespace: istio-system
 
   syncPolicy:
     syncOptions:

@@ -30,7 +30,7 @@ spec:
           values:
             - spot
   limits:
-    nodes: 1
+    nodes: 2
   disruption:
     consolidationPolicy: WhenEmpty
     consolidateAfter: 1m

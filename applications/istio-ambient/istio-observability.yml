@@ -10,8 +10,6 @@ spec:
     repoURL: https://github.com/som-esh/platform-agro
     targetRevision: master
     path: istio-ambient/observability
-    directory:
-      recurse: true
 
   destination:
     server: https://kubernetes.default.svc

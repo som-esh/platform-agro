@@ -12,6 +12,7 @@ spec:
     path: istio-ambient
     directory:
       recurse: true
+      exclude: observability/**
 
   destination:
     server: https://kubernetes.default.svc

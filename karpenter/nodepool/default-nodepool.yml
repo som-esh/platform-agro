@@ -24,13 +24,13 @@ spec:
             - linux
         - key: node.kubernetes.io/instance-type
           operator: In
-          values: ["t3a.small", "t3a.medium"]
+          values: ["t3a.small", "t3a.medium", t3a.micro"]
         - key: karpenter.sh/capacity-type
           operator: In
           values:
             - spot
   limits:
-    nodes: 2
+    nodes: 3
   disruption:
     consolidationPolicy: WhenEmpty
     consolidateAfter: 1m

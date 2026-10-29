@@ -38,6 +38,8 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: kyverno
+
+  syncPolicy:
     syncOptions:
       - CreateNamespace=true
-      - ServerSideApply=true      # Kyverno's CRDs are too large for client-side apply
+      - ServerSideApply=true # Kyverno's CRDs are too large for client-side apply

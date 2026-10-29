@@ -4,6 +4,8 @@ kind: PodMonitor
 metadata:
   name: ztunnel
   namespace: istio-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   selector:
     matchLabels:

@@ -3,7 +3,7 @@ kind: StorageClass
 metadata:
   name: gp3
   annotations:
-    argocd.argoproj.io/sync-wave: "-1"
+    argocd.argoproj.io/sync-wave: "-3"
     # Optional: make gp3 the cluster default (see note below)
     storageclass.kubernetes.io/is-default-class: "true"
 provisioner: ebs.csi.aws.com

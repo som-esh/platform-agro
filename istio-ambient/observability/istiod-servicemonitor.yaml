@@ -4,6 +4,8 @@ kind: ServiceMonitor
 metadata:
   name: istiod
   namespace: istio-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   selector:
     matchLabels:

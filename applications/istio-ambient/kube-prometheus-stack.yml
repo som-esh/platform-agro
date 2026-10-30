@@ -1,4 +1,4 @@
-# Wave 0: Prometheus Operator + Prometheus (+ node-exporter).
+# Wave -2: Prometheus Operator + Prometheus (+ node-exporter).
 # Provides the ServiceMonitor/PodMonitor CRDs used in wave 1.
 apiVersion: argoproj.io/v1alpha1
 kind: Application

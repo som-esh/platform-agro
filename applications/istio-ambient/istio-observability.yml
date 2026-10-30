@@ -18,6 +18,7 @@ spec:
     namespace: istio-system
 
   syncPolicy:
+    automated: {}
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true

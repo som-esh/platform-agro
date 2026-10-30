@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: karpenter-config
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   project: default
 
@@ -16,5 +18,6 @@ spec:
     namespace: kube-system
 
   syncPolicy:
+    automated: {}
     syncOptions:
       - ServerSideApply=true

@@ -40,6 +40,7 @@ spec:
     namespace: kyverno
 
   syncPolicy:
+    automated: {}
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true # Kyverno's CRDs are too large for client-side apply

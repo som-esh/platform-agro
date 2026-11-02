@@ -32,5 +32,9 @@ spec:
   limits:
     nodes: 3
   disruption:
+    budgets:
+      - nodes: "1"
+        reasons:
+          - Drifted
     consolidationPolicy: WhenEmpty
     consolidateAfter: 1m
